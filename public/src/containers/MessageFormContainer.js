@@ -30,17 +30,17 @@ const asyncValidate = (values, dispatch) => {
 
   return new Promise((resolve, reject) => {
 
-    dispatch(validatePostFields(values))
+    dispatch(validateMessageFields(values))
       .then((response) => {
         let data = response.payload.data;
         //if status is not 200 or any one of the fields exist, then there is a field error
         if (response.payload.status != 200 || data.title || data.categories || data.description) {
           //let other components know of error by updating the redux` state
-          dispatch(validatePostFieldsFailure(response.payload));
+          dispatch(validateMessageFieldsFailure(response.payload));
           reject(data); //this is for redux-form itself
         } else {
           //let other components know that everything is fine by updating the redux` state
-          dispatch(validatePostFieldsSuccess(response.payload)); //ps: this is same as dispatching RESET_POST_FIELDS
+          dispatch(validateMessageFieldsSuccess(response.payload)); //ps: this is same as dispatching RESET_Message_FIELDS
           resolve(); //this is for redux-form itself
         }
       });
@@ -48,7 +48,7 @@ const asyncValidate = (values, dispatch) => {
 };
 
 //For any field errors upon submission (i.e. not instant check)
-const validateAndCreatePost = (values, dispatch) => {
+const validateAndCreateMessage = (values, dispatch) => {
 
   return new Promise((resolve, reject) => {
 
@@ -56,21 +56,21 @@ const validateAndCreatePost = (values, dispatch) => {
     let token = sessionStorage.getItem('jwtToken');
     if (!token || token === '') { //if there is no token, dont bother,
       let data = {data: {message: 'Please Sign In'}};//axios like error
-      dispatch(createPostFailure(data)); // but let other comps know
+      dispatch(createMessageFailure(data)); // but let other comps know
       reject(data); //this is for redux-form itself
       return;
     }
-    dispatch(createPost(values, token))
+    dispatch(createMessage(values, token))
       .then((response) => {
         let data = response.payload.data;
         //if any one of these exist, then there is a field error 
         if (response.payload.status != 200) {
           //let other components know of error by updating the redux` state
-          dispatch(createPostFailure(response.payload));
+          dispatch(createMessageFailure(response.payload));
           reject(data); //this is for redux-form itself
         } else {
           //let other components know that everything is fine by updating the redux` state
-          dispatch(createPostSuccess(response.payload));
+          dispatch(createMessageSuccess(response.payload));
           resolve(); //this is for redux-form itself
         }
       });
@@ -82,7 +82,7 @@ const validateAndCreatePost = (values, dispatch) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createPost: validateAndCreatePost,
+    createMessage: validateAndCreateMessage,
     resetMe: () => {
       dispatch(resetNewMessage());
     }
@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
 
 function mapStateToProps(state, ownProps) {
   return {
-    newPost: state.posts.newPost
+    newMessage: state.messages.newMessage
   };
 }
 
