@@ -69,8 +69,8 @@ class Header extends Component {
     					</Link>
             </li>
               <li style={{paddingRight: '10px'}} role="presentation">
-                  <Link style={{color:'#337ab7',  fontSize: '17px'}} to="/postType/new">
-                      PostType
+                  <Link style={{color:'#337ab7',  fontSize: '17px'}} to="/messages/new">
+                      New Message
                   </Link>
               </li>
     			</ul>
@@ -102,8 +102,20 @@ class Header extends Component {
            {this.renderSignInLinks(authenticatedUser)}
     	   </div>
   		);
-  	}
-	};
+  	} else if(type === 'messages_new') {
+            return (
+                <div className="container">
+                    {this.renderSignInLinks(authenticatedUser)}
+                    <ul className="nav  nav-pills navbar-left">
+                        <li style={{paddingRight: '10px'}} role="presentation">
+                            <Link className="text-xs-right"  style={{color:'#337ab7',  fontSize: '17px'}}  to="/">Back To Posts</Link>
+                        </li>
+                    </ul>
+                </div>
+            );
+        }
+
+    };
 
 	render() {
 			return (

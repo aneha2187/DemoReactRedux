@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 //Post list
-export const FETCH_POSTTYPE = 'FETCH_POSTTYPE';
-export const FETCH_POSTTYPE_SUCCESS = 'FETCH_POSTTYPE_SUCCESS';
-export const FETCH_POSTTYPE_FAILURE = 'FETCH_POSTTYPE_FAILURE';
-export const RESET_POSTTYPE = 'RESET_POSTTYPE';
+export const FETCH_POST = 'FETCH_POST';
+export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
+export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
+export const RESET_POST = 'RESET_POST';
 
 //Create new post
 export const CREATE_POSTTYPE = 'CREATE_POSTTYPE';
@@ -33,10 +33,10 @@ export const RESET_DELETED_POSTTYPE = 'RESET_DELETED_POSTTYPE';
 
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
-export function fetchPostType() {
+export function fetchPost() {
   const request = axios({
     method: 'get',
-    url: `${ROOT_URL}/postType`,
+    url: `${ROOT_URL}/post`,
     headers: []
   });
 
@@ -46,16 +46,16 @@ export function fetchPostType() {
   };
 }
 
-export function fetchPostTypeSuccess(postType) {
+export function fetchPostSuccess(post) {
   return {
-    type: FETCH_POSTTYPE_SUCCESS,
-    payload: postType
+    type: FETCH_POST_SUCCESS,
+    payload: post
   };
 }
 
-export function fetchPostTypeFailure(error) {
+export function fetchPostFailure(error) {
   return {
-    type: FETCH_POSTTYPE_FAILURE,
+    type: FETCH_POST_FAILURE,
     payload: error
   };
 }

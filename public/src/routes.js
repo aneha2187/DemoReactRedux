@@ -5,9 +5,11 @@ import App from './pages/App';
 import PostsIndex from './pages/PostsIndex';
 import PostsNew from './pages/PostsNew';
 import PostsShow from './pages/PostsShow';
-import PostTypeNew from './pages/PostTypeNew';
-//import PostTypeIndex from './pages/PostTypeIndex';
-//import PostTypeShow from './pages/PostTypeShow';
+
+import MessagesIndex from './pages/MessagesIndex';
+import MessagesNew from './pages/MessagesNew';
+import MessagesShow from './pages/MessagesShow';
+
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPwd from './pages/ForgotPwd';
@@ -18,7 +20,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={PostsIndex} />
     <Route path="posts/new" component={PostsNew} />
-    <Route path="postType/new" component={PostTypeNew} />
+      <Route path="messages/new" component={MessagesNew} />
     <Route path="posts/:id" component={PostsShow} />
     <Route path="/signin" component={SignIn} />
     <Route path="/signup" component={SignUp} />
